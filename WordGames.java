@@ -8,13 +8,9 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
-public class wordGames {
+public class WordGames {
     public static void main(String[] args) throws IOException {
 
-        boolean loop = true;
-        int choice;
-
-        Scanner scan = new Scanner(System.in);
 
         List<String> listOfStrings = new ArrayList<String>();
 
@@ -37,9 +33,18 @@ public class wordGames {
             e.printStackTrace();
         }
 
-        String[] array = listOfStrings.toArray(new String[0]);
+        getSelection(listOfStrings);
 
-        System.out.println(listOfStrings);
+        // String[] array = listOfStrings.toArray(new String[0]);
+
+        // System.out.println(listOfStrings);
+    }
+
+    public static void getSelection(List<String> listOfStrings) {
+        int choice;
+        boolean loop = true;
+        Scanner scan = new Scanner(System.in);
+
 
         while (loop == true) {
             System.out.println("\n---Menu---");
