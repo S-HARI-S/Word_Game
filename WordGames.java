@@ -8,12 +8,27 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 
+/**
+
+* Word Games is a Java program that provides two word games for users to play: Substring and Points.
+* The menu-driven program provides three options: 1) Substring game, 2) Points game, and 3) Exit.
+* The Substring game  reads a string from user and it classifies words in a dictionary file (dictionary.txt) as either an infix, prefix, or suffix.
+* The Points game calculates the worth of each word based on the sum of the worth of each letter, according to a pre-defined scoring system.
+* THe Exit option exits the program with a "Goodbye!" message.
+
+* @author [your name]
+* @version 1.0
+* @since [date]
+
+*/
+
 public class WordGames {
     public static void main(String[] args) throws IOException {
 
 
         List<String> listOfStrings = new ArrayList<String>();
 
+        //reading data from dictionary.txt and storing in array List "listOfStrings" 
         try {
             BufferedReader bf = new BufferedReader(new FileReader("dictionary.txt"));
 
@@ -33,11 +48,8 @@ public class WordGames {
             e.printStackTrace();
         }
 
-        getSelection(listOfStrings);
+        getSelection(listOfStrings); // Displays the menu with error handling.
 
-        // String[] array = listOfStrings.toArray(new String[0]);
-
-        // System.out.println(listOfStrings);
     }
 
     public static void getSelection(List<String> listOfStrings) {
@@ -56,10 +68,10 @@ public class WordGames {
                 System.out.print("Enter your choice : ");
                 choice = scan.nextInt();
                 if (choice == 1) {
-                    substringProblem(listOfStrings);
+                    substringProblem(listOfStrings); // Substring problem method calling
                 } else if (choice == 2) {
                     System.out.println();
-                    pointsProblem(listOfStrings);
+                    pointsProblem(listOfStrings); // points problem method calling
                 } else if (choice == 3) {
                     System.out.println("Goodbye!");
                     loop = false;
@@ -68,9 +80,11 @@ public class WordGames {
                 }
             } catch (Exception e) {
                 System.out.println("Invalid option, Try again");
-                scan.nextLine();
+                scan.nextLine(); // consume the remaining input line.
             }
         }
+
+
     }
 
     public static void substringProblem(List<String> listOfStrings) {
@@ -89,11 +103,12 @@ public class WordGames {
             }
             if (str.endsWith(subString)) {
                 suffix = true;
-            }
-            if (str.indexOf(subString) != -1 && str.indexOf(subString) != str.lastIndexOf(subString)) {
-                infix = true;
-            } else if (str.indexOf(subString) > 0 && str.indexOf(subString) < str.length()) {
-                infix = true;
+            }if (str.indexOf(subString) != -1) {
+                if (str.indexOf(subString) == str.lastIndexOf(subString)) {
+                    infix = !(prefix || suffix);
+                } else {
+                    infix = true;
+                }
             }
 
             if (prefix && infix && suffix) {
@@ -114,6 +129,7 @@ public class WordGames {
                 System.out.println(str + " = substring not present");
             }
         }
+
     }
 
     public static void pointsProblem(List<String> listOfStrings) {
